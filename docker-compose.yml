@@ -1,0 +1,17 @@
+services:
+  app:
+    build: .
+    ports:
+      - '4000:4000'
+    env_file:
+      - .env
+    depends_on:
+      - neo4j
+  neo4j:
+    image: neo4j:5.8
+    container_name: neo4j
+    ports:
+      - '7687:7687' # Bolt protocol
+      - '7474:7474' # Browser interface
+    environment:
+      - NEO4J_AUTH=neo4j/test12345 # Default username/password
